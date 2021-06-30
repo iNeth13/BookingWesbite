@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { getAllRoom } from "../utils/getAllRoom";
 
-export default function Home({ allRooms }) {
+export default function Index({ allRooms }) {
   return (
     <div>
       {allRooms.map((room, index) => (
@@ -13,13 +13,12 @@ export default function Home({ allRooms }) {
   );
 }
 
-export async function getServerSideProps() {
-  const response = await fetch(`${process.env.BASE_URL}/api/rooms`);
-  const responseData = await response.json();
+export async function getServerSideProps({req}) {
+  const allRooms = await getAllRoom(req);
   console.log(allRooms);
   return {
     props: {
-      allRooms: responseData,
+      allRooms: allRooms,
     },
   };
 }
