@@ -14,11 +14,12 @@ export default function Home({ allRooms }) {
 }
 
 export async function getServerSideProps() {
-  const allRooms = await getAllRoom();
+  const response = await fetch(`${process.env.BASE_URL}/api/rooms`);
+  const responseData = await response.json();
   console.log(allRooms);
   return {
     props: {
-      allRooms: allRooms,
+      allRooms: responseData,
     },
   };
 }
