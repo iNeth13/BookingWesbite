@@ -7,7 +7,7 @@ export default function Home({ allRooms }) {
   return (
     <div>
       {allRooms.map((room, index) => (
-        <p key={idex}>{room._id}</p>
+        <p key={index}>{room._id}</p>
       ))}
     </div>
   );
@@ -15,6 +15,7 @@ export default function Home({ allRooms }) {
 
 export async function getServerSideProps() {
   const allRooms = await getAllRoom();
+  console.log(allRooms);
   return {
     props: {
       allRooms: allRooms,
